@@ -1,0 +1,14 @@
+Mobo:
+BIOS
+Intel Chipset Driver
+Intel ME Components
+Audio
+LAN
+Intel GPU?
+Intel SATA iRST
+
+Other:
+Acer Monitor
+Nvidia GPU
+Samsung NVME Driver
+10GbE NIC
