@@ -8,7 +8,7 @@ rsync -ah --stats 2> "$error_output" 1> "$summary_output"
 rsync -ah --stats 2>> "$error_output" 1>> "$summary_output"
 rsync -ah --stats 2>> "$error_output" 1>> "$summary_output"
 rsync -ah --stats 2>> "$error_output" 1>> "$summary_output"
-#rsync -ah --stats --log-file=$scriptdir/$logdate.log /mnt/user/media /mnt/disks/easystore8tb/backups/media 2>> "$error_output" 1>> "$summary_output"
+#rsync -ah --stats 2>> "$error_output" 1>> "$summary_output"
 
 # Unmount drive
 /sbin/umount '/dev/sdl1' 2>> "$error_output" 1>> "$summary_output"
