@@ -13,4 +13,4 @@ rsync -ah --stats /mnt/user/share /mnt/disks/easystore8tb/backups/share 2>&1 >> 
 /sbin/umount '/dev/sdl1' 2>&1 >> "$log_output"
 
 # Send notification with result
-/usr/local/emhttp/webGui/scripts/notify -e "Share Backup" -s "shareData Backup" -d "Backup of shareData complete" -i "normal" -m "Log output: $log_output"
+/usr/local/emhttp/webGui/scripts/notify -e "Shares Backup" -s "Shares Backup Script Status" -d "backup_shares.sh finished running" -i "normal" -m "Log Output: $log_output"
