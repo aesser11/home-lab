@@ -5,6 +5,8 @@
 # /mnt/user/media/movies /mnt/disks/easystore8tb/backups/media/movies
 # /mnt/user/media/tv /mnt/disks/easystore8tb/backups/media/tv
 
+# prompt to auto-dismount when finished? 
+
 logdate="$(date +%F)"
 logdir="/boot/config/plugins/user.scripts/scripts/backup_shares/logs"
 #$isoscode
@@ -16,19 +18,19 @@ logdir="/boot/config/plugins/user.scripts/scripts/backup_shares/logs"
 #$timemachinecode
 #$umountcode
 
-rsync -ahP --stats --log-file=$logdir/apps-vms-isos-$logdate.log /mnt/user/apps/vms/isos /mnt/disks/easystore8tb/backups/apps/vms/isos
-isoscode="$?"
-rsync -ahP --stats --log-file=$logdir/apps-vms-vdisk-$logdate.log /mnt/user/apps/vms/vdisk /mnt/disks/easystore8tb/backups/apps/vms/vdisk
-vdiskcode="$?"
-rsync -ahP --stats --log-file=$logdir/downloads-$logdate.log /mnt/user/downloads /mnt/disks/easystore8tb/backups/downloads
+#rsync -ahP --log-file=$logdir/apps-vms-isos-$logdate.log /mnt/user/apps/vms/isos /mnt/disks/easystore8tb/backups/apps/vms/isos
+#isoscode="$?"
+#rsync -ahP --log-file=$logdir/apps-vms-vdisk-$logdate.log /mnt/user/apps/vms/vdisk /mnt/disks/easystore8tb/backups/apps/vms/vdisk
+#vdiskcode="$?"
+rsync -ahP --log-file=$logdir/downloads-$logdate.log /mnt/user/downloads /mnt/disks/easystore8tb/backups/downloads
 downloadscode="$?"
-rsync -ahP --stats --log-file=$logdir/media-music-$logdate.log /mnt/user/media/music /mnt/disks/easystore8tb/backups/media/music
+rsync -ahP --log-file=$logdir/media-music-$logdate.log /mnt/user/media/music /mnt/disks/easystore8tb/backups/media/music
 musiccode="$?"
-rsync -ahP --stats --log-file=$logdir/share-$logdate.log /mnt/user/share /mnt/disks/easystore8tb/backups/share
+rsync -ahP --log-file=$logdir/share-$logdate.log /mnt/user/share /mnt/disks/easystore8tb/backups/share
 sharecode="$?"
-rsync -ahP --stats --log-file=$logdir/store-$logdate.log /mnt/user/store /mnt/disks/easystore8tb/backups/store
+rsync -ahP --log-file=$logdir/store-$logdate.log /mnt/user/store /mnt/disks/easystore8tb/backups/store
 storecode="$?"
-rsync -ahP --stats --log-file=$logdir/timemachine-$logdate.log /mnt/user/timemachine /mnt/disks/easystore8tb/backups/timemachine
+rsync -ahP --log-file=$logdir/timemachine-$logdate.log /mnt/user/timemachine /mnt/disks/easystore8tb/backups/timemachine
 timemachinecode="$?"
 
 # unmount drive
@@ -36,7 +38,11 @@ timemachinecode="$?"
 umountcode="$?"
 
 # error notification handling
-if [[ "$isoscode" -eq "0" ]] && [[ "$vdiskcode" -eq "0" ]] && [[ "$downloadscode" -eq "0" ]] && [[ "$musiccode" -eq "0" ]] && [[ "$sharecode" -eq "0" ]] && [[ "$storecode" -eq "0" ]] && [[ "$timemachinecode" -eq "0" ]] && [[ "$umountcode" -eq "0" ]]
+# [[ "$isoscode" -eq "0" ]] && [[ "$vdiskcode" -eq "0" ]] && 
+# /apps/vms/isos/ = $isoscode
+# /apps/vms/vdisk/ = $vdiskcode
+
+if [[ "$downloadscode" -eq "0" ]] && [[ "$musiccode" -eq "0" ]] && [[ "$sharecode" -eq "0" ]] && [[ "$storecode" -eq "0" ]] && [[ "$timemachinecode" -eq "0" ]] && [[ "$umountcode" -eq "0" ]]
 then 
 	/usr/local/emhttp/webGui/scripts/notify -e "Shares Backup" -s "Shares Backup Script" -d "backup_shares.sh completed successfully" -i "normal" -m "Log Directory: 
 $logdir
@@ -46,8 +52,6 @@ Exit Codes:
 umount /dev/sdl1 = $umountcode
 
 # rsync
-/apps/vms/isos/ = $isoscode
-/apps/vms/vdisk/ = $vdiskcode
 /downloads/ = $downloadscode
 /media/music/ = $musiccode
 /share/ = $sharecode
@@ -55,7 +59,7 @@ umount /dev/sdl1 = $umountcode
 /timemachine/ = $timemachinecode
 "
 else
-	/usr/local/emhttp/webGui/scripts/notify -e "Shares Backup" -s "Shares Backup Script" -d "backup_shares.sh failed with errors" -i "alert" -m "Log Directory: 
+	/usr/local/emhttp/webGui/scripts/notify -e "Shares Backup" -s "Shares Backup Script" -d "backup_shares.sh completed with errors" -i "alert" -m "Log Directory: 
 $logdir
 
 Exit Codes:
@@ -63,8 +67,6 @@ Exit Codes:
 umount /dev/sdl1 = $umountcode
 
 # rsync
-/apps/vms/isos/ = $isoscode
-/apps/vms/vdisk/ = $vdiskcode
 /downloads/ = $downloadscode
 /media/music/ = $musiccode
 /share/ = $sharecode
