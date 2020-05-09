@@ -16,19 +16,19 @@ logdir="/boot/config/plugins/user.scripts/scripts/backup_shares/logs"
 #$timemachinecode
 #$umountcode
 
-#rsync -ahP --log-file=$logdir/apps-vms-isos-$logdate.log /mnt/user/apps/vms/isos /mnt/disks/easystore8tb/backups/apps/vms/isos
+#rsync -ahP --log-file=$logdir/apps-vms-isos-$logdate.log /mnt/user/apps/vms/isos /mnt/disks/easystore8tb/backups/apps/vms
 #isoscode="$?"
-#rsync -ahP --log-file=$logdir/apps-vms-vdisk-$logdate.log /mnt/user/apps/vms/vdisk /mnt/disks/easystore8tb/backups/apps/vms/vdisk
+#rsync -ahP --log-file=$logdir/apps-vms-vdisk-$logdate.log /mnt/user/apps/vms/vdisk /mnt/disks/easystore8tb/backups/apps/vms
 #vdiskcode="$?"
-rsync -ahP --log-file=$logdir/downloads-$logdate.log /mnt/user/downloads /mnt/disks/easystore8tb/backups/downloads
+rsync -ahP --log-file=$logdir/downloads-$logdate.log /mnt/user/downloads /mnt/disks/easystore8tb/backups
 downloadscode="$?"
-rsync -ahP --log-file=$logdir/media-music-$logdate.log /mnt/user/media/music /mnt/disks/easystore8tb/backups/media/music
+rsync -ahP --log-file=$logdir/media-music-$logdate.log /mnt/user/media/music /mnt/disks/easystore8tb/backups/media
 musiccode="$?"
-rsync -ahP --log-file=$logdir/share-$logdate.log /mnt/user/share /mnt/disks/easystore8tb/backups/share
+rsync -ahP --log-file=$logdir/share-$logdate.log /mnt/user/share /mnt/disks/easystore8tb/backups
 sharecode="$?"
-rsync -ahP --log-file=$logdir/store-$logdate.log /mnt/user/store /mnt/disks/easystore8tb/backups/store
+rsync -ahP --log-file=$logdir/store-$logdate.log /mnt/user/store /mnt/disks/easystore8tb/backups
 storecode="$?"
-rsync -ahP --log-file=$logdir/timemachine-$logdate.log /mnt/user/timemachine /mnt/disks/easystore8tb/backups/timemachine
+rsync -ahP --log-file=$logdir/timemachine-$logdate.log /mnt/user/timemachine /mnt/disks/easystore8tb/backups
 timemachinecode="$?"
 
 # unmount drive
