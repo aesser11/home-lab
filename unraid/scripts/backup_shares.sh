@@ -55,6 +55,8 @@ if [[ "$downloadscode" -eq "0" ]] && [[ "$musiccode" -eq "0" ]] && [[ "$sharecod
 then 
 	/usr/local/emhttp/webGui/scripts/notify -e "Shares Backup" -s "Shares Backup Script" -d "backup_shares.sh completed successfully" -i "normal" -m "Log Directory: 
 $logdir
+
+Exit Codes:
 # rsync
 /downloads/ = $downloadscode
 /media/music/ = $musiccode
