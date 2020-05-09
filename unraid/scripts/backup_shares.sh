@@ -5,8 +5,6 @@
 # /mnt/user/media/movies /mnt/disks/easystore8tb/backups/media/movies
 # /mnt/user/media/tv /mnt/disks/easystore8tb/backups/media/tv
 
-# prompt to auto-dismount when finished? 
-
 logdate="$(date +%F)"
 logdir="/boot/config/plugins/user.scripts/scripts/backup_shares/logs"
 #$isoscode
@@ -34,23 +32,29 @@ rsync -ahP --log-file=$logdir/timemachine-$logdate.log /mnt/user/timemachine /mn
 timemachinecode="$?"
 
 # unmount drive
-/sbin/umount -v '/dev/sdl1'
-umountcode="$?"
+#/sbin/umount -v '/dev/sdl1'
+#umountcode="$?"
 
 # error notification handling
 # [[ "$isoscode" -eq "0" ]] && [[ "$vdiskcode" -eq "0" ]] && 
 # /apps/vms/isos/ = $isoscode
 # /apps/vms/vdisk/ = $vdiskcode
+# umount
+#umount /dev/sdl1 = $umountcode
 
-if [[ "$downloadscode" -eq "0" ]] && [[ "$musiccode" -eq "0" ]] && [[ "$sharecode" -eq "0" ]] && [[ "$storecode" -eq "0" ]] && [[ "$timemachinecode" -eq "0" ]] && [[ "$umountcode" -eq "0" ]]
+#0 	success
+#1 	incorrect invocation or permissions
+#2 	system error (out of memory, cannot fork, no more loop devices)
+#4 	internal mount bug
+#8 	user interrupt
+#16	problems writing or locking /etc/mtab
+#32	mount failure
+#64	some mount succeeded
+
+if [[ "$downloadscode" -eq "0" ]] && [[ "$musiccode" -eq "0" ]] && [[ "$sharecode" -eq "0" ]] && [[ "$storecode" -eq "0" ]] && [[ "$timemachinecode" -eq "0" ]]
 then 
 	/usr/local/emhttp/webGui/scripts/notify -e "Shares Backup" -s "Shares Backup Script" -d "backup_shares.sh completed successfully" -i "normal" -m "Log Directory: 
 $logdir
-
-Exit Codes:
-# umount
-umount /dev/sdl1 = $umountcode
-
 # rsync
 /downloads/ = $downloadscode
 /media/music/ = $musiccode
@@ -63,9 +67,6 @@ else
 $logdir
 
 Exit Codes:
-# umount
-umount /dev/sdl1 = $umountcode
-
 # rsync
 /downloads/ = $downloadscode
 /media/music/ = $musiccode
@@ -74,16 +75,6 @@ umount /dev/sdl1 = $umountcode
 /timemachine/ = $timemachinecode
 
 Exit Code References:
-# umount
-0 	success
-1 	incorrect invocation or permissions
-2 	system error (out of memory, cannot fork, no more loop devices)
-4 	internal mount bug
-8 	user interrupt
-16	problems writing or locking /etc/mtab
-32	mount failure
-64	some mount succeeded
-
 # rsync
 0 	Success
 1 	Syntax or usage error
