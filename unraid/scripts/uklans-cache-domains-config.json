@@ -1,0 +1,32 @@
+{
+  "ips": {
+    "server": ["192.168.1.71"]
+  },
+  "cache_domains": {
+    "arenanet":     "server",
+    "blizzard":     "server",
+    "bsg":          "server",
+    "cityofheroes": "server",
+    "daybreak":     "server",
+    "epicgames":    "server",
+    "frontier":     "server",
+    "hirez":        "server",
+    "nexusmods":    "server",
+    "neverwinter":  "server",
+    "nintendo":     "server",
+    "origin":       "server",
+    "pathofexile":  "server",
+    "renegadex":    "server",
+    "riot":         "server",
+    "rockstar":     "server",
+    "sony":         "server",
+    "square":       "server",
+    "steam":        "server",
+    "uplay":        "server",
+    "teso":         "server",
+    "warframe":     "server",
+    "wargaming":    "server",
+    "wsus":         "server",
+    "xboxlive":     "server"
+  }
+}

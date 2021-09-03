@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>rtorrentvpn</Name>
+  <Repository>binhex/arch-rtorrentvpn</Repository>
+  <Registry>https://registry.hub.docker.com/r/binhex/arch-rtorrentvpn/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>true</Privileged>
+  <Support>http://lime-technology.com/forum/index.php?topic=47832.0</Support>
+  <Project>https://github.com/rakshasa/rtorrent</Project>
+  <Overview>
+    rTorrent is a quick and efficient BitTorrent client that uses, and is in development alongside, the libTorrent (not to be confused with libtorrent-rasterbar) library. It is written in C++ and uses the ncurses programming library, which means it uses a text user interface. When combined with a terminal multiplexer (e.g. GNU Screen or Tmux) and Secure Shell, it becomes a convenient remote BitTorrent client, this Docker image includes the popular ruTorrent web frontend to rTorrent for ease of use.
+    This Docker includes OpenVPN and WireGuard to ensure a secure and private connection to the Internet, including use of iptables to prevent IP leakage when the tunnel is down. It also includes Privoxy to allow unfiltered access to index sites, to use Privoxy please point your application at "http://host ip:8118".
+  </Overview>
+  <Category>Downloaders:</Category>
+  <WebUI>http://[IP]:[PORT:9080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/rtorrentvpn.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/binhex/docker-templates/master/binhex/images/rtorrent-icon.png</Icon>
+  <ExtraParams>--sysctl="net.ipv4.conf.all.src_valid_mark=1"</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1624203773</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>rTorrent is a quick and efficient BitTorrent client that uses, and is in development alongside, the libTorrent (not to be confused with libtorrent-rasterbar) library. It is written in C++ and uses the ncurses programming library, which means it uses a text user interface. When combined with a terminal multiplexer (e.g. GNU Screen or Tmux) and Secure Shell, it becomes a convenient remote BitTorrent client, this Docker image includes the popular ruTorrent web frontend to rTorrent for ease of use.&#xD;
+    This Docker includes OpenVPN and WireGuard to ensure a secure and private connection to the Internet, including use of iptables to prevent IP leakage when the tunnel is down. It also includes Privoxy to allow unfiltered access to index sites, to use Privoxy please point your application at "http://host ip:8118".</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>5000</HostPort>
+        <ContainerPort>5000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>9080</HostPort>
+        <ContainerPort>9080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>9443</HostPort>
+        <ContainerPort>9443</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>8118</HostPort>
+        <ContainerPort>8118</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/downloads/</HostDir>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/apps/docker/appdata/rtorrentvpn</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>yes</Value>
+      <Name>VPN_ENABLED</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>p3644945</Value>
+      <Name>VPN_USER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value></Value>
+      <Name>VPN_PASS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>pia</Value>
+      <Name>VPN_PROV</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>wireguard</Value>
+      <Name>VPN_CLIENT</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>VPN_OPTIONS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>STRICT_PORT_FORWARD</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>ENABLE_PRIVOXY</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>no</Value>
+      <Name>ENABLE_AUTODL_IRSSI</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>ENABLE_RPC2</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>ENABLE_RPC2_AUTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yes</Value>
+      <Name>ENABLE_WEBUI_AUTH</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>admin</Value>
+      <Name>RPC2_USER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value></Value>
+      <Name>RPC2_PASS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>admin</Value>
+      <Name>WEBUI_USER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value></Value>
+      <Name>WEBUI_PASS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>192.168.1.0/24</Value>
+      <Name>LAN_NETWORK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>209.222.18.222,209.222.18.218,1.1.1.1,1.0.0.1,9.9.9.9,149.112.112.112,8.8.8.8,8.8.4.4,208.67.222.222,208.67.220.220</Value>
+      <Name>NAME_SERVERS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>VPN_INPUT_PORTS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>VPN_OUTPUT_PORTS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>false</Value>
+      <Name>DEBUG</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>America/Chicago</Value>
+      <Name>PHP_TZ</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>000</Value>
+      <Name>UMASK</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1002</Value>
+      <Name>PUID</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Host Port 1" Target="5000" Default="5000" Mode="tcp" Description="Container Port: 5000" Type="Port" Display="always" Required="true" Mask="false">5000</Config>
+  <Config Name="Host Port 2" Target="9080" Default="9080" Mode="tcp" Description="Container Port: 9080" Type="Port" Display="always" Required="true" Mask="false">9080</Config>
+  <Config Name="Host Port 3" Target="9443" Default="9443" Mode="tcp" Description="Container Port: 9443" Type="Port" Display="always" Required="true" Mask="false">9443</Config>
+  <Config Name="Host Port 4" Target="8118" Default="8118" Mode="tcp" Description="Container Port: 8118" Type="Port" Display="always" Required="true" Mask="false">8118</Config>
+  <Config Name="Host Path 2" Target="/data" Default="/mnt/user/appdata/data" Mode="rw" Description="Container Path: /data" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/downloads/</Config>
+  <Config Name="Key 1" Target="VPN_ENABLED" Default="yes" Mode="" Description="Container Variable: VPN_ENABLED" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 2" Target="VPN_USER" Default="vpn username" Mode="" Description="Container Variable: VPN_USER" Type="Variable" Display="always" Required="false" Mask="false">p3644945</Config>
+  <Config Name="Key 3" Target="VPN_PASS" Default="vpn password" Mode="" Description="Container Variable: VPN_PASS" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Key 4" Target="VPN_PROV" Default="pia|airvpn|custom" Mode="" Description="Container Variable: VPN_PROV" Type="Variable" Display="always" Required="false" Mask="false">pia</Config>
+  <Config Name="Key 5" Target="VPN_CLIENT" Default="openvpn|wireguard" Mode="" Description="Container Variable: VPN_CLIENT" Type="Variable" Display="always" Required="false" Mask="false">wireguard</Config>
+  <Config Name="Key 6" Target="VPN_OPTIONS" Default="" Mode="" Description="Container Variable: VPN_OPTIONS" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Key 7" Target="STRICT_PORT_FORWARD" Default="yes" Mode="" Description="Container Variable: STRICT_PORT_FORWARD" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 8" Target="ENABLE_PRIVOXY" Default="no" Mode="" Description="Container Variable: ENABLE_PRIVOXY" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 9" Target="ENABLE_AUTODL_IRSSI" Default="no" Mode="" Description="Container Variable: ENABLE_AUTODL_IRSSI" Type="Variable" Display="always" Required="false" Mask="false">no</Config>
+  <Config Name="Key 10" Target="ENABLE_RPC2" Default="yes" Mode="" Description="Container Variable: ENABLE_RPC2" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 11" Target="ENABLE_RPC2_AUTH" Default="yes" Mode="" Description="Container Variable: ENABLE_RPC2_AUTH" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 12" Target="ENABLE_WEBUI_AUTH" Default="yes" Mode="" Description="Container Variable: ENABLE_WEBUI_AUTH" Type="Variable" Display="always" Required="false" Mask="false">yes</Config>
+  <Config Name="Key 13" Target="RPC2_USER" Default="admin" Mode="" Description="Container Variable: RPC2_USER" Type="Variable" Display="always" Required="false" Mask="false">admin</Config>
+  <Config Name="Key 14" Target="RPC2_PASS" Default="" Mode="" Description="Container Variable: RPC2_PASS" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Key 15" Target="WEBUI_USER" Default="admin" Mode="" Description="Container Variable: WEBUI_USER" Type="Variable" Display="always" Required="false" Mask="false">admin</Config>
+  <Config Name="Key 16" Target="WEBUI_PASS" Default="" Mode="" Description="Container Variable: WEBUI_PASS" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Key 17" Target="LAN_NETWORK" Default="192.168.1.0/24" Mode="" Description="Container Variable: LAN_NETWORK" Type="Variable" Display="always" Required="false" Mask="false">192.168.1.0/24</Config>
+  <Config Name="Key 18" Target="NAME_SERVERS" Default="209.222.18.222,84.200.69.80,37.235.1.174,1.1.1.1,209.222.18.218,37.235.1.177,84.200.70.40,1.0.0.1" Mode="" Description="Container Variable: NAME_SERVERS" Type="Variable" Display="always" Required="false" Mask="false">209.222.18.222,209.222.18.218,1.1.1.1,1.0.0.1,9.9.9.9,149.112.112.112,8.8.8.8,8.8.4.4,208.67.222.222,208.67.220.220</Config>
+  <Config Name="Key 19" Target="VPN_INPUT_PORTS" Default="" Mode="" Description="Container Variable: VPN_INPUT_PORTS" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Key 20" Target="VPN_OUTPUT_PORTS" Default="" Mode="" Description="Container Variable: VPN_OUTPUT_PORTS" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Key 21" Target="DEBUG" Default="false" Mode="" Description="Container Variable: DEBUG" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="Key 22" Target="PHP_TZ" Default="UTC" Mode="" Description="Container Variable: PHP_TZ" Type="Variable" Display="always" Required="false" Mask="false">America/Chicago</Config>
+  <Config Name="Key 23" Target="UMASK" Default="000" Mode="" Description="Container Variable: UMASK" Type="Variable" Display="always" Required="false" Mask="false">000</Config>
+  <Config Name="Key 24" Target="PUID" Default="99" Mode="" Description="Container Variable: PUID" Type="Variable" Display="always" Required="false" Mask="false">1002</Config>
+  <Config Name="Key 25" Target="PGID" Default="100" Mode="" Description="Container Variable: PGID" Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+  <Config Name="AppData Config Path" Target="/config" Default="/mnt/user/apps/docker/appdata/binhex-rtorrentvpn" Mode="rw" Description="Container Path: /config" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/apps/docker/appdata/rtorrentvpn</Config>
+</Container>

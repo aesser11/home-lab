@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>lancache</Name>
+  <Repository>lancachenet/monolithic:latest</Repository>
+  <Registry>https://hub.docker.com/r/lancachenet/monolithic</Registry>
+  <Network>br2</Network>
+  <MyIP>192.168.1.71</MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview>Monolithic&#xD;
+https://github.com/lancachenet/monolithic&#xD;
+&#xD;
+Domains are cached from uklans repo&#xD;
+https://github.com/uklans/cache-domains&#xD;
+&#xD;
+The primary use case is gaming events, such as LAN parties, which need to be able to cope with hundreds or thousands of computers receiving an unannounced patch - without spending a fortune on internet connectivity. Other uses include smaller networks, such as Internet Cafes and home networks, where the new games are regularly installed on multiple computers; or multiple independent operating systems on the same computer.&#xD;
+&#xD;
+This container is designed to support any game that uses HTTP and also supports HTTP range requests (used by Origin). This should make it suitable for:&#xD;
+&#xD;
+Steam (Valve)&#xD;
+Origin (EA Games)&#xD;
+Riot Games (League of Legends)&#xD;
+Battle.net (Hearthstone, Starcraft 2, Overwatch)&#xD;
+Frontier Launchpad (Elite Dangerous, Planet Coaster)&#xD;
+Uplay (Ubisoft)&#xD;
+Windows Updates&#xD;
+&#xD;
+This is the best container to use for all game caching and should be used for Steam in preference to the lancachenet/steamcache and lancachenet/generic containers.</Overview>
+  <Category/>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://avatars.githubusercontent.com/u/16938914</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1630560949</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Monolithic&#xD;
+https://github.com/lancachenet/monolithic&#xD;
+&#xD;
+Domains are cached from uklans repo&#xD;
+https://github.com/uklans/cache-domains&#xD;
+&#xD;
+The primary use case is gaming events, such as LAN parties, which need to be able to cope with hundreds or thousands of computers receiving an unannounced patch - without spending a fortune on internet connectivity. Other uses include smaller networks, such as Internet Cafes and home networks, where the new games are regularly installed on multiple computers; or multiple independent operating systems on the same computer.&#xD;
+&#xD;
+This container is designed to support any game that uses HTTP and also supports HTTP range requests (used by Origin). This should make it suitable for:&#xD;
+&#xD;
+Steam (Valve)&#xD;
+Origin (EA Games)&#xD;
+Riot Games (League of Legends)&#xD;
+Battle.net (Hearthstone, Starcraft 2, Overwatch)&#xD;
+Frontier Launchpad (Elite Dangerous, Planet Coaster)&#xD;
+Uplay (Ubisoft)&#xD;
+Windows Updates&#xD;
+&#xD;
+This is the best container to use for all game caching and should be used for Steam in preference to the lancachenet/steamcache and lancachenet/generic containers.</Description>
+  <Networking>
+    <Mode>br2</Mode>
+    <Publish>
+      <Port>
+        <HostPort>80</HostPort>
+        <ContainerPort/>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>443</HostPort>
+        <ContainerPort/>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/lancache/</HostDir>
+      <ContainerDir>/cache/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/apps/docker/appdata/lancache/logs/</HostDir>
+      <ContainerDir>/data/logs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>500m</Value>
+      <Name>CACHE_MEM_SIZE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>4000000m</Value>
+      <Name>CACHE_DISK_SIZE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>3650d</Value>
+      <Name>CACHE_MAX_AGE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>1m</Value>
+      <Name>CACHE_SLICE_SIZE</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>192.168.1.1 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4 9.9.9.9 149.112.112.112 208.67.222.222 208.67.220.220</Value>
+      <Name>UPSTREAM_DNS</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Cache" Target="/cache/data" Default="" Mode="rw" Description="Container Path: /cache/data" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/lancache/</Config>
+  <Config Name="Logs" Target="/data/logs" Default="" Mode="rw" Description="Container Path: /data/logs" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/apps/docker/appdata/lancache/logs/</Config>
+  <Config Name="CACHE_MEM_SIZE" Target="CACHE_MEM_SIZE" Default="" Mode="" Description="Container Variable: CACHE_MEM_SIZE" Type="Variable" Display="always" Required="false" Mask="false">500m</Config>
+  <Config Name="CACHE_DISK_SIZE" Target="CACHE_DISK_SIZE" Default="" Mode="" Description="Container Variable: CACHE_DISK_SIZE" Type="Variable" Display="always" Required="false" Mask="false">4000000m</Config>
+  <Config Name="CACHE_MAX_AGE" Target="CACHE_MAX_AGE" Default="" Mode="" Description="Container Variable: CACHE_MAX_AGE" Type="Variable" Display="always" Required="false" Mask="false">3650d</Config>
+  <Config Name="CACHE_SLICE_SIZE" Target="CACHE_SLICE_SIZE" Default="" Mode="" Description="Container Variable: CACHE_SLICE_SIZE" Type="Variable" Display="always" Required="false" Mask="false">1m</Config>
+  <Config Name="UPSTREAM_DNS" Target="UPSTREAM_DNS" Default="" Mode="" Description="Container Variable: UPSTREAM_DNS" Type="Variable" Display="always" Required="true" Mask="false">192.168.1.1 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4 9.9.9.9 149.112.112.112 208.67.222.222 208.67.220.220</Config>
+  <Config Name="HTTP" Target="" Default="" Mode="tcp" Description="Port to cache HTTP traffic" Type="Port" Display="always" Required="true" Mask="false">80</Config>
+  <Config Name="HTTPS" Target="" Default="" Mode="tcp" Description="Port to forward HTTPS traffic" Type="Port" Display="always" Required="true" Mask="false">443</Config>
+</Container>
