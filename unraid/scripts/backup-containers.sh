@@ -1,16 +1,23 @@
 #!/bin/bash
-datetime="$(date +%Y-%m-%d-%s)"
 source="/mnt/user/apps/docker/appdata/minecraft4"
-alive=`docker inspect -f '{{.State.Running}}' minecraftjava4`
 destination="/mnt/user/apps/docker/appdata/backups"
-name="minecraft4-$datetime"
 
-# don't do backups if the container isn't running
-while [ "$alive" == "true" ];
+while [ "true" ];
 do
-	# backup
-	zip -r "$destination/$name.zip" "$source"
+	datetime="$(date +%Y-%m-%d-%s)"
+	name="minecraft4-$datetime"
+	alive=`docker inspect -f '{{.State.Running}}' minecraftjava4`
+
+	if [[ $alive == "true" ]]
+	then
+		# backup
+		zip -r "$destination/$name.zip" "$source"
+		printf "done with the archival of $name.zip from $source to $destination"
+	else 
+		printf "no backup taken, docker is not running, variable state is $alive"
+	fi
+
 	# wait
-	printf "done with the archival of $name.zip from $source to $destination, sleeping for 5 minutes"
+	printf "sleeping for 5 minutes"
 	sleep 300
 done
