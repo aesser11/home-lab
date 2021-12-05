@@ -18,6 +18,6 @@ do
 	fi
 
 	# wait
-	printf "sleeping for 5 minutes"
-	sleep 300
+	printf "sleeping for 1 hr"
+	sleep 3600
 done
