@@ -48,10 +48,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [1] = LAYOUT(
-        BL_TOGG, BL_STEP, BL_BRTG, BL_INC,  BL_DEC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SCRL,          KC_PAUS,
+        BL_TOGG, BL_STEP, BL_BRTG, BL_UP,   BL_DOWN, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SCRL,          KC_PAUS,
         RGB_TOG, RGB_MOD, RGB_RMOD,RGB_SPI, RGB_SPD, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, KC_NO,   KC_NO,   KC_NO,            KC_INS,
-        KC_NO,   KC_NO,   KC_NO,   EEP_RST, RESET,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PWR,  KC_NO,   KC_NO,   KC_NO,            KC_HOME,
-        KC_NO,   KC_NO,   KC_NO,   DEBUG,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_NO,            KC_END,
+        KC_NO,   KC_NO,   KC_NO,   EE_CLR,  RESET,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PWR,  KC_NO,   KC_NO,   KC_NO,            KC_HOME,
+        KC_NO,   KC_NO,   KC_NO,   DB_TOGG, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_NO,            KC_END,
         KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   NK_TOGG, NK_ON,   NK_OFF,  KC_NO,   KC_NO,            KC_NO,   KC_MPLY, KC_NO,
         KC_NO,   GUI_ON,  GUI_OFF,                            KC_NO,                              GUI_OFF, GUI_ON,  KC_NO,   KC_MPRV, KC_MSTP, KC_MNXT
     ),
