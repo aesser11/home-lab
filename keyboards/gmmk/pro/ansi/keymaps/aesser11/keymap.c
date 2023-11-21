@@ -19,15 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-//      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Prt           Rotary(Mute)
-//      ~        1        2        3        4        5        6        7        8        9        0         -       (=)	     BackSpc           Del
+//      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12      Prt           Rotary(Mute)
+//      ~        1        2        3        4        5        6        7        8        9        0         -       (=)      BackSpc           Del
 //      Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        \                 PgUp
 //      Caps     A        S        D        F        G        H        J        K        L        ;        "                 Enter             PgDn
 //      Sh_L              Z        X        C        V        B        N        M        ,        .        ?                 Sh_R     Up       End
 //      Ct_L     Win_L    Alt_L                               SPACE                               Alt_R    FN       Ct_R     Left     Down     Right
 
 
-    // The FN key by default maps to a momentary toggle to layer 1 to provide access to the RESET key (to put the board into bootloader mode). Without
+    // The FN key by default maps to a momentary toggle to layer 1 to provide access to the QK_BOOT key (to put the board into bootloader mode). Without
     // this mapping, you have to open the case to hit the button on the bottom of the PCB (near the USB cable attachment) while plugging in the USB
     // cable to get the board into bootloader mode - definitely not fun when you're working on your QMK builds. Remove this and put it back to KC_RGUI
     // if that's your preference.
@@ -48,25 +48,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [1] = LAYOUT(
-        BL_TOGG, BL_STEP, BL_BRTG, BL_INC,  BL_DEC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PAUS,          KC_NO,
+        BL_TOGG, BL_STEP, BL_BRTG, BL_INC,  BL_DEC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_SCRL,          KC_PAUS,
         RGB_TOG, RGB_MOD, RGB_RMOD,RGB_SPI, RGB_SPD, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, KC_NO,   KC_NO,   KC_NO,            KC_INS,
-        KC_NO,   KC_NO,   KC_NO,   EEP_RST, RESET,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_HOME,
+        KC_NO,   KC_NO,   KC_NO,   EEP_RST, RESET,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PWR,  KC_NO,   KC_NO,   KC_NO,            KC_HOME,
         KC_NO,   KC_NO,   KC_NO,   DEBUG,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,            KC_NO,            KC_END,
         KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   NK_TOGG, NK_ON,   NK_OFF,  KC_NO,   KC_NO,            KC_NO,   KC_MPLY, KC_NO,
-        KC_NO,   GUI_ON,  GUI_OFF,                            KC_NO,                              GUI_OFF, GUI_ON,  KC_NO,   KC_MRWD, KC_MSTP, KC_MFFD
+        KC_NO,   GUI_ON,  GUI_OFF,                            KC_NO,                              GUI_OFF, GUI_ON,  KC_NO,   KC_MPRV, KC_MSTP, KC_MNXT
     ),
 
 
 };
 // clang-format on
 
-#ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (clockwise) {
-      tap_code(KC_VOLU);
-    } else {
-      tap_code(KC_VOLD);
-    }
-    return false;
-}
-#endif // ENCODER_ENABLE
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) }
+};
+#endif
