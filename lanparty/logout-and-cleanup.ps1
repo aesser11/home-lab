@@ -11,36 +11,26 @@ Get-Process -Name "Steam", "Discord" -ErrorAction SilentlyContinue | Stop-Proces
 Start-Sleep -Seconds 2  # Wait for processes to terminate cleanly
 
 # ----- Steam Logout -----
-$steamConfig = "C:\Program Files (x86)\Steam\config\loginusers.vdf"
-if (Test-Path $steamConfig) {
-    Remove-Item $steamConfig -Force -ErrorAction SilentlyContinue
-    Write-Output "Deleted Steam login session."
-}
+Remove-Item -Path "C:\Program Files (x86)\Steam\config\loginusers.vdf" -Force -ErrorAction SilentlyContinue
+Write-Output "Deleted Steam login session."
 
 # ----- Discord Logout -----
-$discordStorage = "C:\Users\%USERNAME%\AppData\Roaming\Discord\Local Storage\leveldb"
-if (Test-Path $discordStorage) {
-    Remove-Item "$discordStorage\*" -Force -ErrorAction SilentlyContinue
-    Write-Output "Cleared Discord local storage (forced logout)."
-}
+Remove-Item -Path "C:\Users\%USERNAME%\AppData\Roaming\Discord\Local Storage\leveldb\" -Recurse -Force -ErrorAction SilentlyContinue
+Write-Output "Cleared Discord local storage (forced logout)."
 
 # ----- Clear Edge Browsing History -----
-Remove-Item "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\History*" -Force -ErrorAction SilentlyContinue
-Remove-Item "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\History*" -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+Write-Output "Cleared Edge Browsing History"
 
 # ----- Clear Chrome Browsing History -----
-Remove-Item "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\History*" -Force -ErrorAction SilentlyContinue
-Remove-Item "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
-
-# ----- Clear Firefox Browsing History -----
-$firefoxProfiles = Get-ChildItem "$env:APPDATA\Mozilla\Firefox\Profiles\" -Directory -ErrorAction SilentlyContinue
-foreach ($profile in $firefoxProfiles) {
-    Remove-Item "$($profile.FullName)\places.sqlite" -Force -ErrorAction SilentlyContinue
-    Remove-Item "$($profile.FullName)\cache2\*" -Recurse -Force -ErrorAction SilentlyContinue
-}
+Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\History*" -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
+Write-Output "Cleared Chrome Browsing History"
 
 # ----- Log the execution -----
 Add-Content -Path "$env:ProgramData\LogoutAndCleanup.log" -Value "Task ran at $(Get-Date)"
+
 '@
 
 # Write cleanup script to disk
