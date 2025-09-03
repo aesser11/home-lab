@@ -11,27 +11,18 @@ Get-Process -Name "Steam", "Discord" -ErrorAction SilentlyContinue | Stop-Proces
 Start-Sleep -Seconds 2  # Wait for processes to terminate cleanly
 
 # ----- Steam Logout -----
-$steamConfig = "$env:APPDATA\Steam\config\loginusers.vdf"
+$steamConfig = "C:\Program Files (x86)\Steam\config\loginusers.vdf"
 if (Test-Path $steamConfig) {
     Remove-Item $steamConfig -Force -ErrorAction SilentlyContinue
     Write-Output "Deleted Steam login session."
 }
-# Optional: Remove Steam Guard "remember me" files
-$steamSSFN = Get-ChildItem "$env:PROGRAMFILES(x86)\Steam\" -Filter "ssfn*" -ErrorAction SilentlyContinue
-foreach ($file in $steamSSFN) {
-    Remove-Item $file.FullName -Force -ErrorAction SilentlyContinue
-}
 
 # ----- Discord Logout -----
-$discordStorage = "$env:APPDATA\discord\Local Storage\leveldb"
+$discordStorage = "C:\Users\%USERNAME%\AppData\Roaming\Discord\Local Storage\leveldb"
 if (Test-Path $discordStorage) {
     Remove-Item "$discordStorage\*" -Force -ErrorAction SilentlyContinue
     Write-Output "Cleared Discord local storage (forced logout)."
 }
-# Optional: Remove cookies and preferences
-$discordCookies = "$env:APPDATA\discord\Cookies"
-$discordPrefs = "$env:APPDATA\discord\Preferences"
-Remove-Item $discordCookies, $discordPrefs -Force -ErrorAction SilentlyContinue
 
 # ----- Clear Edge Browsing History -----
 Remove-Item "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\History*" -Force -ErrorAction SilentlyContinue
