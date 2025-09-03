@@ -62,21 +62,21 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -File `"$scriptPath`""
 $trigger = New-ScheduledTaskTrigger -AtStartup
 $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
+$settings = New-ScheduledTaskSettingsSet `
+    -AllowStartIfOnBatteries `
+    -DontStopIfGoingOnBatteries `
+    -ExecutionTimeLimit (New-TimeSpan -Minutes 15) `
+    -StartWhenAvailable `
+    -RunOnlyIfLoggedOn:$false `
+    -WakeToRun:$false `
+    -RunOnlyIfNetworkAvailable:$false `
+    -RunOnlyIfIdle:$false
 
 Register-ScheduledTask -TaskName $taskName `
     -Action $action `
     -Trigger $trigger `
     -Principal $principal `
-    -Settings @{
-        AllowStartIfOnBatteries = $true
-        DontStopIfGoingOnBatteries = $true
-        ExecutionTimeLimit = "PT15M"
-        RunOnlyIfNetworkAvailable = $false
-        RunOnlyIfIdle = $false
-        StartWhenAvailable = $true
-        WakeToRun = $false
-        RunOnlyIfLoggedOn = $false
-    } `
+    -Settings $settings `
     -Description "Logs out of Steam/Discord and clears browser history at startup." `
     -Force
 
