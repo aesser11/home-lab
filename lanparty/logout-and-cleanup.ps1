@@ -15,7 +15,7 @@ Remove-Item -Path "C:\Program Files (x86)\Steam\config\loginusers.vdf" -Force -E
 Write-Output "Deleted Steam login session."
 
 # ----- Discord Logout -----
-Remove-Item -Path "C:\Users\%USERNAME%\AppData\Roaming\Discord\Local Storage\leveldb\" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$env:appdata\discord\Local Storage\leveldb" -Recurse -Force -ErrorAction SilentlyContinue
 Write-Output "Cleared Discord local storage (forced logout)."
 
 # ----- Clear Edge Browsing History -----
@@ -30,7 +30,6 @@ Write-Output "Cleared Chrome Browsing History"
 
 # ----- Log the execution -----
 Add-Content -Path "$env:ProgramData\LogoutAndCleanup.log" -Value "Task ran at $(Get-Date)"
-
 '@
 
 # Write cleanup script to disk
