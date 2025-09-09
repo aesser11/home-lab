@@ -9,6 +9,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 $taskName = "LogoutOfSteamAndDiscord"
 $scriptPath = "$env:ProgramData\LogoutOfSteamAndDiscord.ps1"
 
+#TODO add logout for epic launcher, battle.net, origin, gog galaxy, etc...  
 $scriptContent = @'
 Get-Process -Name "Steam", "Discord" -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep -Seconds 1
