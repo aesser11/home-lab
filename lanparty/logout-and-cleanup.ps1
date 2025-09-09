@@ -1,5 +1,10 @@
 # Script: CreateLogoutAndCleanupTask.ps1
 # Description: Creates a scheduled task that runs at startup to log out of Steam & Discord and clear browser history.
+# Relaunch the script with administrator privileges and bypass execution-policy if it isn't already
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File $PSCommandPath" -Verb RunAs
+    exit
+}
 
 $taskName = "LogoutOfSteamAndDiscord"
 $scriptPath = "$env:ProgramData\LogoutOfSteamAndDiscord.ps1"
