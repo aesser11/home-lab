@@ -3,6 +3,7 @@
 - `PROTON_DLSS_UPGRADE` - easy enable for latest models of dlss
 - `PROTON_ENABLE_NGX_UPDATER` - enable for specific setting of dlss versions (allows specifying certian modles granularly) 
 - `DXVK_NVAPI_DRS_SETTINGS` - DRS settings here - example for model `L` - `DXVK_NVAPI_DRS_SETTINGS=NGX_DLSS_SR_OVERRIDE=on,NGX_DLSS_RR_OVERRIDE=on,NGX_DLSS_FG_OVERRIDE=on,NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION=render_preset_l,NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION=render_preset_l`
+- `NVPRESENT_ENABLE_SMOOTH_MOTION` - set to 1 to enable smooth motion frames for games that don't support frame gen (needs testing)
 
 Not certain of all of these are GE proton only or which ones are usable in regular proton
 ## Sources
